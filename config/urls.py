@@ -1,22 +1,40 @@
-"""
-URL configuration for config project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/6.0/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
-from django.contrib import admin
+# kurslar_app/urls.py  (yoki sizning app nomingiz o‘rniga)
 from django.urls import path
+from django.contrib import admin
 
+from course.views import (
+    Branch_menu,
+    Branch_create,
+    Branch_update,
+    Branch_deletion,
+
+    Burning_menu,
+    Burning_create,
+    Burning_update,
+    Burning_deletion,
+
+    Infaration_menu,
+    Infaration_create,
+    Infaration_update,
+    Infaration_deletion,
+)
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # ====================== Branch ======================
+    path('branch/', Branch_menu.as_view(), name='branch_list'),
+    path('branch/create/', Branch_create.as_view(), name='branch_create'),
+    path('branch/<int:pk>/update/', Branch_update.as_view(), name='branch_update'),
+    path('branch/<int:pk>/delete/', Branch_deletion.as_view(), name='branch_delete'),
+
+    # ====================== Burning ======================
+    path('burning/', Burning_menu.as_view(), name='burning_list'),
+    path('burning/create/', Burning_create.as_view(), name='burning_create'),
+    path('burning/<int:pk>/update/', Burning_update.as_view(), name='burning_update'),
+    path('burning/<int:pk>/delete/', Burning_deletion.as_view(), name='burning_delete'),
+
+    # ====================== Infaration ======================
+    path('infaration/', Infaration_menu.as_view(), name='infaration_list'),
+    path('infaration/create/', Infaration_create.as_view(), name='infaration_create'),
+    path('infaration/<int:pk>/update/', Infaration_update.as_view(), name='infaration_update'),
+    path('infaration/<int:pk>/delete/', Infaration_deletion.as_view(), name='infaration_delete'),
 ]
