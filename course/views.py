@@ -3,6 +3,8 @@ from .serializers import BranchSerializer, InfarationSerializer, BurningSerializ
 from .models import Branch, Infaration, Burning
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework import generics
+from django.template import loader
+from django.http import HttpResponse
 
 # =========================================================================
 # Branch bo'limi
@@ -65,3 +67,34 @@ class Infaration_deletion(generics.DestroyAPIView):
 class Infaration_create(generics.CreateAPIView):
     queryset = Infaration.objects.all()
     serializer_class = InfarationSerializer
+#==============================filter================================================
+
+#
+# def testing(request):
+#     # Masalan, branch_name = "IT" bo'lganlarni olish:
+#     mydata = Branch.objects.filter(branch_name='frontned').values()
+#
+#     template = loader.get_template('template.html')
+#     context = {
+#         'mymembers': mydata,  # nomi 'mymembers' bo'lishi shart emas, istalgan
+#     }
+#     return HttpResponse(template.render(context, request))
+def backend_filter(request):
+    # 'backend' branchini tanlagan Infaration obyektlarini olish
+    mydata = Infaration.objects.filter(direction__burning='backend')
+
+    template = loader.get_template('template.html')
+    context = {
+        'mymembers': mydata,  # hozir bu Infaration obyektlari
+    }
+    return HttpResponse(template.render(context, request))
+
+def frontend_filter(request):
+    # 'backend' branchini tanlagan Infaration obyektlarini olish
+    mydata = Infaration.objects.filter(direction__burning='frontend')
+
+    template = loader.get_template('template.html')
+    context = {
+        'mymembers': mydata,  # hozir bu Infaration obyektlari
+    }
+    return HttpResponse(template.render(context, request))
