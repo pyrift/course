@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'course',
     'rest_framework',
     'django_filters',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,16 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend',
     ],
+
+}
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Booking Market API',
+    'DESCRIPTION': 'Booking Market loyihasining API hujjatlari',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # Ixtiyoriy: agar kerak bo'lsa autentifikatsiya shartlarini qo'shishingiz mumkin
 }
