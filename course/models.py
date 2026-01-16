@@ -4,8 +4,14 @@ from django.db.models import ManyToManyField
 class Branch(models.Model):
     branch_name = models.CharField(max_length = 100)
 
+    def __str__(self):
+        return self.branch_name
+
 class Burning(models.Model):
     burning = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.burning
 
 class Infaration(models.Model):
     young = models.IntegerField()
@@ -15,3 +21,6 @@ class Infaration(models.Model):
     phone_number = models.IntegerField()
     select_branch = models.ManyToManyField(Branch)
     telegram_urls = models.CharField(max_length = 100)
+
+    def __str__(self):
+        return self.telegram_urls
